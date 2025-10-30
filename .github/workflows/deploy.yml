@@ -12,8 +12,10 @@ jobs:
 
     env:
       MONGODB_CLUSTER_ADDRESS: cluster.l1haao5.mongodb.net
-      MONGODB_USERNAME: khyati
-      MONGODB_PASSWORD: DKgqkR6nRlI3Zbb2
+      # MONGODB_USERNAME: khyati
+      # MONGODB_PASSWORD: DKgqkR6nRlI3Zbb2
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} 
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD_GHACTIONS }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
