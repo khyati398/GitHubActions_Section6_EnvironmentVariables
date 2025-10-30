@@ -8,14 +8,16 @@ env:
   MONGODB_DB_NAME: GHActionsDB
 jobs:
   test:
-    # environment: testing
-
+    environment: testing
     env:
-      MONGODB_CLUSTER_ADDRESS: cluster.l1haao5.mongodb.net
+      #MONGODB_CLUSTER_ADDRESS: cluster.l1haao5.mongodb.net
       # MONGODB_USERNAME: khyati
       # MONGODB_PASSWORD: DKgqkR6nRlI3Zbb2
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} 
-      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD_GHACTIONS }}
+      # MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }} 
+      # MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD_GHACTIONS }}
+      MONGODB_CLUSTER_ADDRESS: ${{ vars.MONGODB_CLUSTER_ADDRESS_GHENVIRONMENT }}
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME_GHENVIRONMENT}}
+      MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD_GHENVIRONMENT}}
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
