@@ -30,7 +30,7 @@ jobs:
           PORT: 80
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
-        env:
+        env: #Step environment variable
           PORT: 80
         run: npm test
       - name: Output information
