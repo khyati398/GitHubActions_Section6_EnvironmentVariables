@@ -27,11 +27,11 @@ jobs:
         run: npm ci
       - name: Run server
         env:
-          PORT: 80
+          PORT: 8080
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         env: #Step environment variable
-          PORT: 80
+          PORT: 8080
         run: npm test
       - name: Output information
         run: echo "${{ env.MONGODB_USERNAME }}"
