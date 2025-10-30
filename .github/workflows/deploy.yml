@@ -1,0 +1,45 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+      - dev
+env:
+  MONGODB_DB_NAME: GHActionsDB
+jobs:
+  test:
+    # environment: testing
+
+    env:
+      MONGODB_CLUSTER_ADDRESS: cluster.l1haao5.mongodb.net
+      MONGODB_USERNAME: khyati
+      MONGODB_PASSWORD: DKgqkR6nRlI3Zbb2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run server
+        env:
+          PORT: 80
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
+      - name: Run tests
+        env:
+          PORT: 80
+        run: npm test
+      - name: Output information
+        run: echo "${{ env.MONGODB_USERNAME }}"
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |        
+          echo "${{ env.MONGODB_USERNAME }}"
+          echo "$MONGODB_DB_NAME"
